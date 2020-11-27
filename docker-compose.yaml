@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  # Compile keymap.c to hex file
+  compile:
+    image: qmkfm/qmk_firmware
+    working_dir: /qmk_firmware
+    volumes:
+      - ./keyboards:/qmk_firmware/keyboards
+      - ./.build:/qmk_firmware/.build
+    environment:
+      KEYBOARD: crkbd
+      KEYMAP: hhiroshell_mac
+    # QMK Command: qmk compile -kb KEYBOARD -km KEYMAP
+    command: /bin/bash -c 'qmk compile -kb $$KEYBOARD -km $$KEYMAP'
